@@ -1,0 +1,33 @@
+table recepcao {
+  id serial [pk]
+  nome_paciente varchar
+  data_nasc timestamp
+  sexo varchar
+  num_sus varchar
+}
+
+table medico as M {
+  id serial [pk]
+  nome_medico varchar
+  consultorio int
+  
+}
+
+table chamada_paciente  {
+  id serial [pk]
+  nome_paciente varchar
+  consultorio int
+  nome_medico varchar
+}
+
+table triagem {
+  id serial [pk]
+  nome_paciente varchar
+  local_encaminhamento varchar
+  nome_medico varchar
+
+}
+ref: recepcao.nome_paciente < triagem.nome_paciente
+ref: triagem.nome_paciente < chamada_paciente.nome_paciente
+ref:triagem.local_encaminhamento > M.consultorio
+ref:chamada_paciente.nome_medico > M.nome_medico
